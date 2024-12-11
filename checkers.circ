@@ -107,8 +107,9 @@
       <a name="facing" val="east"/>
       <a name="label" val="reset"/>
     </comp>
-    <comp lib="0" loc="(1290,160)" name="Clock">
+    <comp lib="0" loc="(1290,130)" name="Clock">
       <a name="facing" val="north"/>
+      <a name="lowDuration" val="15"/>
     </comp>
     <comp lib="0" loc="(1300,110)" name="Constant">
       <a name="facing" val="north"/>
@@ -162,7 +163,9 @@
       <a name="facing" val="south"/>
       <a name="label" val="reset"/>
     </comp>
-    <comp lib="0" loc="(30,640)" name="Clock"/>
+    <comp lib="0" loc="(60,640)" name="Clock">
+      <a name="lowDuration" val="15"/>
+    </comp>
     <comp lib="0" loc="(700,980)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="reset"/>
@@ -250,13 +253,9 @@
     <comp loc="(1180,100)" name="joystick_ctrl">
       <a name="facing" val="west"/>
     </comp>
-    <comp loc="(1290,130)" name="clock_delay">
-      <a name="facing" val="north"/>
-    </comp>
     <comp loc="(1580,350)" name="upscaler">
       <a name="facing" val="west"/>
     </comp>
-    <comp loc="(60,640)" name="clock_delay"/>
     <wire from="(1000,700)" to="(1000,730)"/>
     <wire from="(1010,300)" to="(1060,300)"/>
     <wire from="(1010,490)" to="(1060,490)"/>
@@ -715,57 +714,5 @@
     <wire from="(420,150)" to="(430,150)"/>
     <wire from="(420,180)" to="(420,190)"/>
     <wire from="(420,190)" to="(430,190)"/>
-  </circuit>
-  <circuit name="clock_delay">
-    <a name="circuit" val="clock_delay"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="clabel" val="clk"/>
-    <a name="clabelup" val="north"/>
-    <a name="simulationFrequency" val="128.0"/>
-    <comp lib="0" loc="(320,20)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(50,20)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-    </comp>
-    <comp lib="4" loc="(100,20)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <comp lib="4" loc="(170,20)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <comp lib="4" loc="(240,20)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <comp lib="4" loc="(310,20)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <wire from="(100,20)" to="(130,20)"/>
-    <wire from="(100,40)" to="(110,40)"/>
-    <wire from="(110,40)" to="(110,60)"/>
-    <wire from="(120,40)" to="(120,60)"/>
-    <wire from="(120,40)" to="(130,40)"/>
-    <wire from="(120,60)" to="(180,60)"/>
-    <wire from="(170,20)" to="(200,20)"/>
-    <wire from="(170,40)" to="(180,40)"/>
-    <wire from="(180,40)" to="(180,60)"/>
-    <wire from="(190,40)" to="(190,60)"/>
-    <wire from="(190,40)" to="(200,40)"/>
-    <wire from="(190,60)" to="(250,60)"/>
-    <wire from="(240,20)" to="(270,20)"/>
-    <wire from="(240,40)" to="(250,40)"/>
-    <wire from="(250,40)" to="(250,60)"/>
-    <wire from="(260,40)" to="(260,60)"/>
-    <wire from="(260,40)" to="(270,40)"/>
-    <wire from="(260,60)" to="(320,60)"/>
-    <wire from="(310,20)" to="(320,20)"/>
-    <wire from="(310,40)" to="(320,40)"/>
-    <wire from="(320,40)" to="(320,60)"/>
-    <wire from="(50,20)" to="(60,20)"/>
-    <wire from="(50,40)" to="(50,60)"/>
-    <wire from="(50,40)" to="(60,40)"/>
-    <wire from="(50,60)" to="(110,60)"/>
   </circuit>
 </project>
