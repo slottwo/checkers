@@ -35,11 +35,10 @@ casa_branca:
     li        t6, 0xffffff             # Casa branca
 
 armazena_casa:
-    add       t7, gp, t0
-    sw        t6, t7(zero)             # Armazena a cor da casa no tabuleiro
+    sw        t6, memoria(t0)          # Armazena a cor da casa na memória
 
     jal       ra, impressao
-    addi      t0, t0, 4                # Incrementa o �ndice do tabuleiro
+    addi      t0, t0, 4                # Incrementa o Índice do tabuleiro
     addi      t2, t2, 1                # Incrementa a coluna
     j         loop_colunas
 
@@ -55,18 +54,12 @@ proxima_linha:
     j         loop_linhas
 
 fim_desenho:
-# Reseta o índice do tabuleiro para início do jogo
-    li        t0, 0
-
-# Inicialização de turnos e regras
-    li        s0, 0                    # Turno: 0 para jogador 1, 1 para jogador 2
+    li        t0, 0                    # Reseta o índice do tabuleiro para início do jogo
+    li        s0, 0                    # Inicializa Turno: 0 para jogador 1, 1 para jogador 2
 
 entrada_movimento:
-# Verifica condições de vitória antes de cada movimento
-    jal       verifica_vitoria
-
-# Verifica capturas obrigatórias
-    jal       verifica_captura
+    jal       verifica_vitoria         # Verifica condições de vitória antes de cada movimento
+    jal       verifica_captura         # Verifica capturas obrigatórias
 
 # Recebe movimento do teclado
     lw        t5, entrada(zero)        # Recebe controle (5 bits)
