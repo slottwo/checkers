@@ -1,11 +1,10 @@
 _start:
-.equ saida_x 0x400
-.equ saida_y 0x418
-.equ resetTela 0x430
-.equ corTela 0x448
-#.equ memoria_de_video 0x478
-#.equ controle 0x878
-#.equ posicao_peca 0x478
+    .equ      memoria 0x000
+    .equ      saida_x 0x400
+    .equ      saida_y 0x418
+    .equ      corTela 0x430
+    .equ      entrada 0x448
+    .equ      reset   0x460
 
 main:
     # Inicializa o tabuleiro
@@ -82,7 +81,6 @@ imprime_peca:
     jal ra, impressao
     #sw zero, saida_x(zero)
     #sw zero, saida_y(zero)
-    
-    
+
 loop_eterno:
 j loop_eterno
