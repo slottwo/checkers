@@ -14,12 +14,14 @@ main:
 
 # Desenho do tabuleiro com padrão de cores alternado (preto e branco)
 loop_linhas:
-    bge       t1, 8, fim_desenho       # Se a linha é 8, termina
+    li        t3, 8
+    bge       t1, t3, inicia_jogo      # Se a linha é 8, termina desenho
 
     li        t2, 0                    # Reseta coluna
 
 loop_colunas:
-    bge       t2, 8, proxima_linha     # Se a coluna é 8, vai para a próxima linha
+    li        t3, 8
+    bge       t2, t3, proxima_linha    # Se a coluna é 8, vai para a próxima linha
 
     andi      t3, t1, 1                # Verifica se a linha é par ou ímpar
     andi      t4, t2, 1                # Verifica se a coluna é par ou ímpar
@@ -28,18 +30,25 @@ loop_colunas:
     beqz      t5, casa_branca
 
 casa_preta:
-    li        t6, 0x000000             # Casa preta
+    li        t6, 0x00                 # Casa preta
     j         armazena_casa
 
 casa_branca:
-    li        t6, 0xffffff             # Casa branca
+    li        s0, 0xff
+    slli      s0, s0, 16
+    add       t6, s0, zero
+
+    li        s0, 0xff
+    slli      s0, s0, 8
+    add       t6, t6, s0
+
+    addi      t6, t6, 0xff             # Casa branca
 
 armazena_casa:
-    add       t7, gp, t0
-    sw        t6, t7(zero)             # Armazena a cor da casa no tabuleiro
+    sw        t6, memoria(t0)          # Armazena a cor da casa na memória
 
     jal       ra, impressao
-    addi      t0, t0, 4                # Incrementa o �ndice do tabuleiro
+    addi      t0, t0, 4                # Incrementa o índice do tabuleiro
     addi      t2, t2, 1                # Incrementa a coluna
     j         loop_colunas
 
@@ -54,19 +63,13 @@ proxima_linha:
     addi      t1, t1, 1                # Incrementa a linha
     j         loop_linhas
 
-fim_desenho:
-# Reseta o índice do tabuleiro para início do jogo
-    li        t0, 0
-
-# Inicialização de turnos e regras
-    li        s0, 0                    # Turno: 0 para jogador 1, 1 para jogador 2
+inicia_jogo:
+    li        t0, 0                    # Reseta o índice do tabuleiro para início do jogo
+    li        s0, 0                    # Inicializa Turno: 0 para jogador 1, 1 para jogador 2
 
 entrada_movimento:
-# Verifica condições de vitória antes de cada movimento
-    jal       verifica_vitoria
-
-# Verifica capturas obrigatórias
-    jal       verifica_captura
+    jal       verifica_vitoria         # Verifica condições de vitória antes de cada movimento
+    jal       verifica_captura         # Verifica capturas obrigatórias
 
 # Recebe movimento do teclado
     lw        t5, entrada(zero)        # Recebe controle (5 bits)
